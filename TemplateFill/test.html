@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Export html form data to excel using javascript</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exceljs/dist/exceljs.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.0/FileSaver.min.js"></script>
+    <!-- Link to external JavaScript file -->
+    <script src="exportData.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <form id="myForm" onsubmit="addRow()">
+            <div class="form-group">
+                <label for="name">Vārds:</label>
+                <input type="text" class="form-control" id="name" required/>
+            </div>
+            <div class="form-group">
+                <label for="surname">Uzvārds:</label>
+                <input type="text" class="form-control" id="surname" required/>
+            </div>
+            <div class="form-group">
+                <label for="class">Klase:</label>
+                <select class="form-control" id="class" required>
+                    <option value="7.a">7.a</option>
+                    <option value="7.b">7.b</option>
+                    <option value="7.c">7.c</option>
+                    <option value="7.d">7.d</option>
+                    <option value="7.e">7.e</option>
+                    <option value="8.a">8.a</option>
+                    <option value="8.b">8.b</option>
+                    <option value="8.c">8.c</option>
+                    <option value="8.d">8.d</option>
+                    <option value="8.e">8.e</option>
+                    <option value="9.a">9.a</option>
+                    <option value="9.b">9.b</option>
+                    <option value="9.c">9.c</option>
+                    <option value="9.d">9.d</option>
+                    <option value="9.e">9.e</option>
+                    <option value="10.a">10.a</option>
+                    <option value="10.b">10.b</option>
+                    <option value="10.c">10.c</option>
+                    <option value="10.d">10.d</option>
+                    <option value="10.e">10.e</option>
+                    <option value="11.a">11.a</option>
+                    <option value="11.b">11.b</option>
+                    <option value="11.c">11.c</option>
+                    <option value="11.d">11.d</option>
+                    <option value="11.e">11.e</option>
+                    <option value="12.a">12.a</option>
+                    <option value="12.b">12.b</option>
+                    <option value="12.c">12.c</option>
+                    <option value="12.d">12.d</option>
+                    <option value="12.e">12.e</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="award">Apbalvojums:</label>
+                <select class="form-control" id="award" required>
+                    <option value="1. vieta">1. vieta</option>
+                    <option value="2. vieta">2. vieta</option>
+                    <option value="3. vieta">3. vieta</option>
+                    <option value="Atzinība">Atzinība</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="subject">Priekšmets:</label>
+                <select class="form-control" id="subject" required>
+                    <option value="Matemātika">Matemātika</option>
+                    <option value="Latviešu valoda">Latviešu valoda</option>
+                    <option value="Angļu valoda">Angļu valoda</option>
+                    <option value="Sports">Sports</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="olimpnr">Olimpiādes Nr.:</label>
+                <input type="number" class="form-control" id="olimpnr"/>
+            </div>
+            <hr>
+            <div class="form-group">
+                <label for="award2">Apbalvojums2:</label>
+                <select class="form-control" id="award2">
+                    <option value=" "> </option>
+                    <option value="1. vieta">1. vieta</option>
+                    <option value="2. vieta">2. vieta</option>
+                    <option value="3. vieta">3. vieta</option>
+                    <option value="Atzinība">Atzinība</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="subject2">Priekšmets2:</label>
+                <select class="form-control" id="subject2" > 
+                    <option value=" "> </option>
+                    <option value="Matemātika">Matemātika</option>
+                    <option value="Latviešu valoda">Latviešu valoda</option>
+                    <option value="Angļu valoda">Angļu valoda</option>
+                    <option value="Sports">Sports</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="olimpnr2">Olimpiādes2 Nr.:</label>
+                <input type="number" class="form-control" id="olimpnr2">
+            </div>
+            <hr>
+            <div class="form-group">
+                <label for="award3">Apbalvojums3:</label>
+                <select class="form-control" id="award3">               
+                    <option value=" "> </option>
+                    <option value="1. vieta">1. vieta</option>
+                    <option value="2. vieta">2. vieta</option>
+                    <option value="3. vieta">3. vieta</option>
+                    <option value="Atzinība">Atzinība</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="subject3">Priekšmets3:</label>
+                <select class="form-control" id="subject3" >
+                    <option value=" "> </option>
+                    <option value="Matemātika">Matemātika</option>
+                    <option value="Latviešu valoda">Latviešu valoda</option>
+                    <option value="Angļu valoda">Angļu valoda</option>
+                    <option value="Sports">Sports</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="olimpnr3">Olimpiādes3 Nr.:</label>
+                <input type="number" class="form-control" id="olimpnr3">
+            </div>
+            <hr>
+            <!-- Hidden date input field -->
+            <input type="hidden" id="recipient">
+            <input type="hidden" id="date">
+            <br>
+            <button type="button" class="btn btn-primary" onclick="if (checkRequiredFields()) addRow()">Pievienot sarakstam</button>
+            <button type="submit" class="btn btn-danger" onclick="clearTable()">Notīrīt sarakstu</button>
+        </form>
+        <br>
+        <table id="tblexportData" class="table">
+            <thead>
+                <tr>
+                    <th>Vārds</th>
+                    <th>Uzvārds</th>
+                    <th>Klase</th>
+                    <th>Apbalvojums</th>
+                    <th>Priekšmets</th>
+                    <th>OlimpNr.</th>
+                    <th>Apbalvojums2</th>
+                    <th>Priekšmets2</th>
+                    <th>Olimp2Nr.</th>
+                    <th>Apbalvojums3</th>
+                    <th>Priekšmets3</th>
+                    <th>Olimp3Nr.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Existing table rows will be added dynamically -->
+            </tbody>
+        </table>
+        <button type="submit" class="btn btn-success" onclick="exportToExcel('tblexportData', 'FormFiller')">Export</button>
+        <!-- New Import button -->
+        <button type="button" class="btn btn-primary" onclick="importFromExcel()">Import</button>
+    </div>
+</div>
+
+<script>
+    function deleteRow(button) {
+    var row = button.closest("tr"); // Find the closest parent row element
+    row.parentNode.removeChild(row); // Remove the row from its parent node
+    }
+
+    function editRowWeb(button) {
+    var row = button.parentNode.parentNode.parentNode; // Get the row element
+
+    // Loop through each cell in the row
+    for (var i = 0; i < row.cells.length - 1; i++) { // Exclude the last cell (actions cell)
+        var cell = row.cells[i];
+        var currentValue = cell.textContent.trim(); // Get the current text content
+
+        // Create an input element with the current value as its value
+        var input = document.createElement('input');
+        input.type = 'text';
+        input.value = currentValue;
+
+        // Replace the cell's content with the input field
+        cell.innerHTML = ''; // Clear existing content
+        cell.appendChild(input);
+    }
+
+    // Change the button's onclick function to saveRow
+    button.innerHTML = 'Save'; // Change button text
+    button.onclick = function () {
+        saveRow(this);
+    };
+    }
+
+
+    function saveRow(button) {
+    var row = button.parentNode.parentNode.parentNode; // Get the row element
+
+    // Loop through each cell in the row
+    for (var i = 0; i < row.cells.length - 1; i++) { // Exclude the last cell (actions cell)
+        var cell = row.cells[i];
+        var input = cell.querySelector('input'); // Get the input field inside the cell
+        var newValue = input.value.trim(); // Get the new value from the input field
+
+        // Update the cell's content with the new value
+        cell.innerHTML = newValue;
+    }
+
+    // Change the button's onclick function back to editRowWeb
+    var editButton = row.querySelector('.edit-btn'); // Get the edit button
+    editButton.innerHTML = 'Edit'; // Change button text
+    editButton.onclick = function () {
+        editRowWeb(this);
+    };
+    }
+
+    function addButtons() {
+        var table = document.getElementById("tblexportData").getElementsByTagName('tbody')[0];
+        var newRow = table.insertRow(table.rows.length);
+        
+        // Insert cells
+        for (var i = 0; i < 12; i++) {
+            newRow.insertCell(i);
+        }
+
+        // Add buttons
+        addButtonsToRow(newRow);
+    }
+
+    function addButtonsToRow(row) {
+    var buttonGroup = document.createElement("div");
+    buttonGroup.className = "btn-group";
+
+    var deleteBtn = document.createElement("button");
+    deleteBtn.innerHTML = "Delete";
+    deleteBtn.className = "btn btn-danger delete-btn";
+    deleteBtn.onclick = function () {
+        deleteRow(this);
+    };
+
+    var editBtn = document.createElement("button");
+    editBtn.innerHTML = "Edit";
+    editBtn.className = "btn btn-primary edit-btn";
+    editBtn.onclick = function () {
+        editRowWeb(this);
+    };
+
+    var saveBtn = document.createElement("button");
+    saveBtn.innerHTML = "Save";
+    saveBtn.className = "btn btn-success save-btn"; // Add save button class
+    saveBtn.onclick = function () {
+        saveRow(this);
+    };
+
+    buttonGroup.appendChild(editBtn);
+    buttonGroup.appendChild(deleteBtn);
+
+    var actionsCell = row.insertCell(-1);
+    actionsCell.appendChild(buttonGroup);
+    }
+
+    window.onload = function () {
+        var table = document.getElementById("tblexportData");
+        var rows = table.getElementsByTagName("tr");
+        for (var i = 1; i < rows.length; i++) { // Skip header row
+            addButtonsToRow(rows[i]);
+        }
+    };
+</script>
+</body>
+</html>
